@@ -2,16 +2,16 @@
  *
  * Copyright (C) 2001-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - AGPL >= 3.0
  *
- * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
- * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU Affero General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
- * details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along with this program. If not, see
- * <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
  *
  **/
 package net.eiroca.library.license.api;
@@ -40,10 +40,11 @@ public class LicenseManager {
 
   public License getLicense(final String product, final boolean createNew) {
     final String licFile = product + ".lic";
+    final String defaultLicFile = "default.lic";
     final String keyFile = product + ".key";
     License license = null;
     try {
-      license = getLicense(keyFile, licFile);
+      license = getLicense(keyFile, licFile, defaultLicFile);
     }
     catch (final LicenseException e) {
       Logs.ignore(e);
@@ -69,7 +70,12 @@ public class LicenseManager {
         inputStream = new FileInputStream(licensePath);
       }
       else {
-        inputStream = LibFile.getResourceStream(licensePaths[0], null);
+        for (final String path : licensePaths) {
+          inputStream = LibFile.getResourceStream(path, null);
+          if (inputStream != null) {
+            break;
+          }
+        }
       }
       if (inputStream == null) { throw new LicenseNotFoundException(); }
       license = loadLicense(inputStream, publicKeyFile);

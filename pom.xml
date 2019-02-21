@@ -4,7 +4,7 @@
 	<name>eLicence</name>
 	<groupId>net.eiroca</groupId>
 	<artifactId>eLicence</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>pom</packaging>
 	<organization>
 		<name>net.eiroca</name>
