@@ -17,7 +17,7 @@
 package net.eiroca.tools.licence.server.action;
 
 import net.eiroca.library.server.ServerResponse;
-import net.eiroca.tools.licenceserver.LicenseServer;
+import net.eiroca.tools.licence.server.util.LicenseServer;
 import spark.Request;
 import spark.Response;
 import spark.Route;

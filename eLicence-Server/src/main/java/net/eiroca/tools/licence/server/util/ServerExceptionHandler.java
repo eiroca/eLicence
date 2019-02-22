@@ -14,26 +14,17 @@
  * If not, see <http://www.gnu.org/licenses/>.
  *
  **/
-package net.eiroca.tools.licenceserver;
+package net.eiroca.tools.licence.server.util;
 
-import net.eiroca.tools.licence.server.action.AboutAction;
-import net.eiroca.tools.licence.server.util.JsonTransformer;
-import net.eiroca.tools.licence.server.util.LicenseServer;
-import net.eiroca.tools.licence.server.util.ServerExceptionHandler;
-import spark.ResponseTransformer;
-import spark.Spark;
+import spark.ExceptionHandler;
+import spark.Request;
+import spark.Response;
 
-public class eLicenseServer {
+public class ServerExceptionHandler implements ExceptionHandler<Exception> {
 
-  static ServerExceptionHandler errorHandler = new ServerExceptionHandler();
-
-  public static void main(final String[] args) {
-    Spark.port(LicenseServer.getServerPort());
-    final ResponseTransformer jSonRender = new JsonTransformer();
-
-    Spark.get("/about", new AboutAction(), jSonRender);
-
-    Spark.exception(Exception.class, eLicenseServer.errorHandler);
-
+  @Override
+  public void handle(final Exception e, final Request request, final Response response) {
+    e.printStackTrace();
   }
+
 }

@@ -14,28 +14,19 @@
  * If not, see <http://www.gnu.org/licenses/>.
  *
  **/
-package net.eiroca.tools.licenceserver;
+package net.eiroca.tools.licence.server.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import spark.ResponseTransformer;
+import net.eiroca.library.core.Helper;
 
-public class JsonTransformer implements ResponseTransformer {
+public class LicenseServer {
 
-  private static final boolean PRETTY = true;
-  private final Gson gson;
+  public static final int SERVER_PORT = 2001;
+  public static final String CFG_SERVERPORT = "server.port";
+  public static final String SERVER_APINAME = "License Server";
+  public static final String SERVER_APIVERS = "0.0.2";
 
-  public JsonTransformer() {
-    final GsonBuilder builder = new GsonBuilder();
-    if (JsonTransformer.PRETTY) {
-      builder.setPrettyPrinting();
-    }
-    gson = builder.create();
+  public static int getServerPort() {
+    final int port = Helper.getInt(System.getProperty(LicenseServer.CFG_SERVERPORT), LicenseServer.SERVER_PORT);
+    return port;
   }
-
-  @Override
-  public String render(final Object model) {
-    return gson.toJson(model);
-  }
-
 }
