@@ -16,10 +16,7 @@
  **/
 package net.eiroca.library.license.api;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.PublicKey;
 import net.eiroca.library.core.Helper;
 import net.eiroca.library.data.SortedProperties;
@@ -56,29 +53,15 @@ public class LicenseManager {
   }
 
   public License getLicense(final String publicKeyFile, final String... licensePaths) throws LicenseException {
-    InputStream inputStream = null;
     License license = null;
-    String licensePath = null;
-    for (final String path : licensePaths) {
-      if (Files.exists(Paths.get(path))) {
-        licensePath = path;
-        break;
-      }
-    }
     try {
-      if (licensePath != null) {
-        inputStream = new FileInputStream(licensePath);
-      }
-      else {
-        for (final String path : licensePaths) {
-          inputStream = LibFile.getResourceStream(path, null);
-          if (inputStream != null) {
-            break;
-          }
-        }
-      }
+      InputStream inputStream = null;
+      inputStream = LibFile.findResource(licensePaths);
       if (inputStream == null) { throw new LicenseNotFoundException(); }
       license = loadLicense(inputStream, publicKeyFile);
+    }
+    catch (final LicenseNotFoundException e) {
+      throw e;
     }
     catch (final Exception e) {
       throw new LicenseException(e);
