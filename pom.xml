@@ -14,9 +14,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.8</jdk.version>
     <eLib.version>0.0.10</eLib.version>
-    <slf4j.version>1.7.30</slf4j.version>
-    <log4j.version>2.13.3</log4j.version>
-    <spark.version>2.9.1</spark.version>
+    <slf4j.version>1.7.32</slf4j.version>
+    <log4j.version>2.14.1</log4j.version>
+    <spark.version>2.9.3</spark.version>
   </properties>
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
