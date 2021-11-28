@@ -23,10 +23,10 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import javax.xml.bind.DatatypeConverter;
 import net.eiroca.library.core.Helper;
 import net.eiroca.library.core.LibDate;
 import net.eiroca.library.data.SortedProperties;
@@ -117,7 +117,7 @@ public class License {
     final Signature dsa = Signature.getInstance(Constants.SIGNATURE_ALG);
     dsa.initVerify(publicKey);
     dsa.update(message);
-    final byte[] decoded = DatatypeConverter.parseBase64Binary(signature);
+    final byte[] decoded = Base64.getDecoder().decode(signature);
     return dsa.verify(decoded);
   }
 
