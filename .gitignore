@@ -58,3 +58,4 @@ local.properties
 #
 **/target/*
 **/Products/*
+**/.classpath

@@ -21,10 +21,15 @@
             <exclude>**/simplelogger.properties</exclude>
           </excludes>
           <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
             <manifest>
+              <addDefaultEntries>false</addDefaultEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+              <addBuildEnvironmentEntries>false</addBuildEnvironmentEntries>
               <addClasspath>true</addClasspath>
-              <mainClass>BulkGenerator</mainClass>
               <classpathPrefix>libs/</classpathPrefix>
+              <mainClass>BulkGenerator</mainClass>
             </manifest>
           </archive>
         </configuration>

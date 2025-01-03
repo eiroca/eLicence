@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.eiroca</groupId>
@@ -21,10 +23,15 @@
             <exclude>**/simplelogger.properties</exclude>
           </excludes>
           <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
             <manifest>
+              <addDefaultEntries>false</addDefaultEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+              <addBuildEnvironmentEntries>false</addBuildEnvironmentEntries>
               <addClasspath>true</addClasspath>
-              <mainClass>net.eiroca.tools.licenceserver.LicenseServer</mainClass>
               <classpathPrefix>libs/</classpathPrefix>
+              <mainClass>net.eiroca.tools.licenceserver.LicenseServer</mainClass>
             </manifest>
           </archive>
         </configuration>
