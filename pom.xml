@@ -1,11 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <name>eLicence</name>
   <groupId>net.eiroca</groupId>
   <artifactId>eLicence</artifactId>
-  <version>0.0.10</version>
+  <version>1.8.1</version>
   <packaging>pom</packaging>
   <organization>
     <name>net.eiroca</name>
@@ -15,9 +13,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- library internal  -->
     <cavour.version>0.0.1</cavour.version>
-    <eJDBCDrivers.version>0.0.10</eJDBCDrivers.version>
-    <eLib.version>0.0.10</eLib.version>
-    <eLicense.version>0.0.10</eLicense.version>
+    <eJDBCDrivers.version>1.8.1</eJDBCDrivers.version>
+    <eLib.version>1.8.1</eLib.version>
+    <eLicense.version>1.8.1</eLicense.version>
     <!-- library external  -->
     <activemq.version>5.7.0</activemq.version>
     <asynchbase.version>1.8.2</asynchbase.version>
@@ -127,6 +125,8 @@
     <jdk.version>1.8</jdk.version>
     <junit.version>4.13.2</junit.version>
     <servlet.version>3.1.0</servlet.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
