@@ -22,6 +22,8 @@ import java.io.OutputStream;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -72,7 +74,8 @@ public class License {
   }
 
   public Date getExpirationDate() {
-    return Helper.getDate(getExpiration(), Constants.DATE_FORMAT, Constants.EXPIRED_DATE);
+    DateFormat parser = new SimpleDateFormat(Constants.DATE_FORMAT_STR);
+    return Helper.getDate(getExpiration(), parser, Constants.EXPIRED_DATE);
   }
 
   public boolean isExpired() {

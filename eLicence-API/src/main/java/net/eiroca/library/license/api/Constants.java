@@ -16,8 +16,6 @@
  **/
 package net.eiroca.library.license.api;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Constants {
@@ -34,8 +32,7 @@ public class Constants {
   public static final String P_PRODDUCT = "product-id";
 
   public static final Date EXPIRED_DATE = new Date(0);
-
-  public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+  public static final String DATE_FORMAT_STR = "yyyy/MM/dd";
 
   // public static final String SIGNATURE_ALG = "SHA/DSA";
   public static final String SIGNATURE_ALG = "SHA256withRSA";
