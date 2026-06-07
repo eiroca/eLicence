@@ -59,3 +59,4 @@ local.properties
 **/target/*
 **/Products/*
 **/.classpath
+**/.project
