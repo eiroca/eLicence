@@ -25,7 +25,7 @@ import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import javax.xml.bind.DatatypeConverter;
+import java.util.Base64;
 import net.eiroca.library.system.LibFile;
 
 public class EncryptionHelper {
@@ -63,7 +63,7 @@ public class EncryptionHelper {
     dsa.initSign(privateKey);
     dsa.update(message);
     final byte[] signature = dsa.sign();
-    final String encoded = DatatypeConverter.printBase64Binary(signature);
+    final String encoded = Base64.getEncoder().encodeToString(signature);
     return encoded;
   }
 

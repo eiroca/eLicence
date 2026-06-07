@@ -1,22 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<name>eLicence</name>
-	<groupId>net.eiroca</groupId>
-	<artifactId>eLicence</artifactId>
-	<version>1.8.2</version>
-	<packaging>pom</packaging>
-	<organization>
-		<name>net.eiroca</name>
-		<url>www.eiroca.net</url>
-	</organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <name>eLicence</name>
+  <groupId>net.eiroca</groupId>
+  <artifactId>eLicence</artifactId>
+  <version>1.11.2</version>
+  <packaging>pom</packaging>
+  <organization>
+    <name>net.eiroca</name>
+    <url>www.eiroca.net</url>
+  </organization>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jdk.version>11</jdk.version>
     <!-- library internal  -->
     <cavour.version>0.0.1</cavour.version>
-    <eJDBCDrivers.version>1.8.2</eJDBCDrivers.version>
-    <eLib.version>1.8.2</eLib.version>
-    <eLicense.version>1.8.2</eLicense.version>
+    <eJDBCDrivers.version>1.${jdk.version}.2</eJDBCDrivers.version>
+    <eLib.version>1.${jdk.version}.2</eLib.version>
+    <eLicense.version>1.${jdk.version}.2</eLicense.version>
     <!-- library external  -->
     <activemq.version>5.7.0</activemq.version>
     <asynchbase.version>1.8.2</asynchbase.version>
@@ -106,11 +106,16 @@
     <xerces.version>2.9.1</xerces.version>
     <zlib.version>1.1.3</zlib.version>
     <zookeeper.version>3.6.2</zookeeper.version>
+    <!-- library Backward compatibility -->
+    <javax.xml.soap.version>1.4.0</javax.xml.soap.version>
+    <javax.xml.ws.version>2.3.1</javax.xml.ws.version>
+    <javax.activation.version>1.2.0</javax.activation.version>
     <!-- library external (deprecated) -->
     <spark.version>2.9.4</spark.version>
+    <flume.version>1.7.0</flume.version>
     <!-- drivers -->
     <postgresql.version>42.7.11</postgresql.version>
-    <sqlserver.version>13.4.0.jre8</sqlserver.version>
+    <sqlserver.version>13.4.0.jre11</sqlserver.version>
     <mysql.version>9.7.0</mysql.version>
     <ingres.version>10.2-4.1.10</ingres.version>
     <mongodb.version>3.12.14</mongodb.version>
@@ -136,107 +141,107 @@
     <mvn-surefire-plugin.version>3.5.2</mvn-surefire-plugin.version>
     <mvn-versions-plugin.version>2.21.0</mvn-versions-plugin.version>
     <!-- compile & test  -->
-    <jdk.version>1.8</jdk.version>
     <junit.version>4.13.2</junit.version>
     <servlet.version>3.1.0</servlet.version>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>${jdk.version}</maven.compiler.source>
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
   </properties>
-	<build>
-		<finalName>${project.artifactId}-${project.version}</finalName>
-		<plugins>
-			<!-- Set a JDK compiler level -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${mvn-compiler-plugin.version}</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
-			<!-- Make the jar -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${mvn-jar-plugin.version}</version>
-				<configuration>
-					<!-- DO NOT include log4j.properties file in your Jar -->
-					<excludes>
-						<exclude>**/log4j.properties</exclude>
-						<exclude>**/simplelogger.properties</exclude>
-						<exclude>**/placeholder</exclude>
-					</excludes>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-						<manifest>
-							<addDefaultEntries>false</addDefaultEntries>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
-							<addBuildEnvironmentEntries>false</addBuildEnvironmentEntries>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>libs/</classpathPrefix>
-						</manifest>
-						<manifestEntries>
-							<Build-Jdk>${jdk.version}</Build-Jdk>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-			<!-- Copy project dependency -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>${mvn-dependency-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<!-- exclude junit, we need runtime dependency only -->
-							<includeScope>runtime</includeScope>
-							<outputDirectory>${project.build.directory}/libs/</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Unit test surefire -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${mvn-surefire-plugin.version}</version>
-			</plugin>
-			<!-- Version dependency check - versions:display-dependency-updates -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>${mvn-versions-plugin.version}</version>
-				<configuration>
-					<!-- Ignore unstable versions globally -->
-					<ignoredVersions>
-						<ignoredVersion>.*-M.*</ignoredVersion>
-						<ignoredVersion>.*-alpha.*</ignoredVersion>
-						<ignoredVersion>.*-beta.*</ignoredVersion>
-					</ignoredVersions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-	<modules>
-		<module>eLicence-API</module>
-		<module>eLicence-Server</module>
-		<module>LicenseTool</module>
-		<module>BulkGenerator</module>
-	</modules>
+  <build>
+    <finalName>${project.artifactId}-${project.version}</finalName>
+    <plugins>
+      <!-- Set a JDK compiler level -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${mvn-compiler-plugin.version}</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+      <!-- Make the jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${mvn-jar-plugin.version}</version>
+        <configuration>
+          <!-- DO NOT include log4j.properties file in your Jar -->
+          <excludes>
+            <exclude>**/log4j.properties</exclude>
+            <exclude>**/simplelogger.properties</exclude>
+            <exclude>**/placeholder</exclude>
+          </excludes>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+            <manifest>
+              <addDefaultEntries>false</addDefaultEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+              <addBuildEnvironmentEntries>false</addBuildEnvironmentEntries>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>libs/</classpathPrefix>
+            </manifest>
+            <manifestEntries>
+              <Build-Jdk>${jdk.version}</Build-Jdk>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <!-- Copy project dependency -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${mvn-dependency-plugin.version}</version>
+        <executions>
+          <execution>
+            <?m2e ignore?>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <!-- exclude junit, we need runtime dependency only -->
+              <includeScope>runtime</includeScope>
+              <outputDirectory>${project.build.directory}/libs/</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Unit test surefire -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${mvn-surefire-plugin.version}</version>
+      </plugin>
+      <!-- Version dependency check - versions:display-dependency-updates -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${mvn-versions-plugin.version}</version>
+        <configuration>
+          <!-- Ignore unstable versions globally -->
+          <ignoredVersions>
+            <ignoredVersion>.*-M.*</ignoredVersion>
+            <ignoredVersion>.*-alpha.*</ignoredVersion>
+            <ignoredVersion>.*-beta.*</ignoredVersion>
+          </ignoredVersions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <modules>
+    <module>eLicence-API</module>
+    <module>eLicence-Server</module>
+    <module>LicenseTool</module>
+    <module>BulkGenerator</module>
+  </modules>
 </project>
