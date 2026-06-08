@@ -16,18 +16,19 @@
  **/
 package net.eiroca.tools.licence.server.action;
 
+import io.javalin.http.Context;
+import io.javalin.http.Handler;
 import net.eiroca.library.server.ServerResponse;
 import net.eiroca.tools.licence.server.util.LicenseServer;
-import spark.Request;
-import spark.Response;
-import spark.Route;
 
-public class AboutAction implements Route {
+public class AboutAction implements Handler {
 
   private final ServerResponse aboutMe = new ServerResponse(0, LicenseServer.SERVER_APINAME + " " + LicenseServer.SERVER_APIVERS);
 
   @Override
-  public Object handle(final Request request, final Response response) throws Exception {
-    return aboutMe;
+  public void handle(Context ctx) throws Exception {
+    ctx.status(200);
+    ctx.json(aboutMe);
   }
+
 }

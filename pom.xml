@@ -3,7 +3,7 @@
   <name>eLicence</name>
   <groupId>net.eiroca</groupId>
   <artifactId>eLicence</artifactId>
-  <version>1.11.2</version>
+  <version>1.17.3</version>
   <packaging>pom</packaging>
   <organization>
     <name>net.eiroca</name>
@@ -11,12 +11,12 @@
   </organization>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jdk.version>11</jdk.version>
+    <jdk.version>17</jdk.version>
     <!-- library internal  -->
     <cavour.version>0.0.1</cavour.version>
-    <eJDBCDrivers.version>1.${jdk.version}.2</eJDBCDrivers.version>
-    <eLib.version>1.${jdk.version}.2</eLib.version>
-    <eLicense.version>1.${jdk.version}.2</eLicense.version>
+    <eJDBCDrivers.version>1.${jdk.version}.3</eJDBCDrivers.version>
+    <eLib.version>1.${jdk.version}.3</eLib.version>
+    <eLicense.version>1.${jdk.version}.3</eLicense.version>
     <!-- library external  -->
     <activemq.version>5.7.0</activemq.version>
     <asynchbase.version>1.8.2</asynchbase.version>
@@ -57,7 +57,7 @@
     <httpclient5.version>5.6.1</httpclient5.version>
     <httpcore5.version>5.3.1</httpcore5.version>
     <httpclient.version>4.5.14</httpclient.version>
-    <io.javalin.version>6.4.0</io.javalin.version>
+    <io.javalin.version>7.2.2</io.javalin.version>
     <ipaddress.version>5.6.2</ipaddress.version>
     <irclib.version>1.10</irclib.version>
     <jackson.version>1.9.13</jackson.version>

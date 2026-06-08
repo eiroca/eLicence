@@ -16,24 +16,23 @@
  **/
 package net.eiroca.tools.licenceserver;
 
+import io.javalin.Javalin;
+import io.javalin.json.JavalinJackson;
 import net.eiroca.tools.licence.server.action.AboutAction;
-import net.eiroca.tools.licence.server.util.JsonTransformer;
 import net.eiroca.tools.licence.server.util.LicenseServer;
 import net.eiroca.tools.licence.server.util.ServerExceptionHandler;
-import spark.ResponseTransformer;
-import spark.Spark;
 
 public class eLicenseServer {
 
   static ServerExceptionHandler errorHandler = new ServerExceptionHandler();
 
   public static void main(final String[] args) {
-    Spark.port(LicenseServer.getServerPort());
-    final ResponseTransformer jSonRender = new JsonTransformer();
-
-    Spark.get("/about", new AboutAction(), jSonRender);
-
-    Spark.exception(Exception.class, eLicenseServer.errorHandler);
-
+    Javalin app = Javalin.create(config -> {
+      config.jsonMapper(new JavalinJackson());
+      config.routes.get("/about", new AboutAction());
+      config.routes.exception(Exception.class, eLicenseServer.errorHandler);
+    });
+    app.start(LicenseServer.getServerPort());
   }
+  
 }

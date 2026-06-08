@@ -16,14 +16,14 @@
  **/
 package net.eiroca.tools.licence.server.util;
 
-import spark.ExceptionHandler;
-import spark.Request;
-import spark.Response;
+import io.javalin.http.Context;
+import io.javalin.http.ExceptionHandler;
 
 public class ServerExceptionHandler implements ExceptionHandler<Exception> {
 
   @Override
-  public void handle(final Exception e, final Request request, final Response response) {
+  public void handle(final Exception e, Context ctx) {
+    ctx.status(600);
     e.printStackTrace();
   }
 
